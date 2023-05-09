@@ -26,9 +26,12 @@ const Message = ({ message }) => {
           }
           alt=""
         />
+        {/* Update message send time here */}
         <span>just now</span>
       </div>
       <div className="messageContent">
+        {/* This works if the message contains an image and blank text */}
+        {/* {(message.text !== "") && <p>{message.text}</p>} */}
         <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
       </div>

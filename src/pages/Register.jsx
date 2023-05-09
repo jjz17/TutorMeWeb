@@ -8,6 +8,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [err, setErr] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -31,27 +32,7 @@ const Register = () => {
       const date = new Date().getTime();
       const storageRef = ref(storage, `${displayName + date}`);
 
-        // try {
-        //   //Update profile
-        //   await updateProfile(res.user, {
-        //     displayName,
-        //   });
-        //   //create user on firestore
-        //   await setDoc(doc(db, "webUsers", res.user.uid), {
-        //     uid: res.user.uid,
-        //     displayName,
-        //     email,
-        //   });
-
-        //   //create empty user chats on firestore
-        //   await setDoc(doc(db, "userChats", res.user.uid), {});
-        //   navigate("/");
-        // } catch (err) {
-        //   console.log(err);
-        //   setErr(true);
-        //   setLoading(false);
-        //   }
-
+      // TODO: Handle when avatar image isn't uploaded
       await uploadBytesResumable(storageRef, file).then(() => {
         getDownloadURL(storageRef).then(async (downloadURL) => {
           try {
@@ -82,6 +63,7 @@ const Register = () => {
       });
     } catch (err) {
       setErr(true);
+      setErrorMessage(err.message);
       setLoading(false);
     }
   };
@@ -95,7 +77,8 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          <input required style={{ display: "none" }} type="file" id="file" />
+          {/* <input required style={{ display: "none" }} type="file" id="file" /> */}
+          <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
             <span>Add an avatar</span>
@@ -103,6 +86,7 @@ const Register = () => {
           <button disabled={loading}>Sign up</button>
           {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong</span>}
+          {err && <span>{errorMessage}</span>}
         </form>
         <p>
           You do have an account? <Link to="/register">Login</Link>

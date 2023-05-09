@@ -16,7 +16,7 @@ const Chats = () => {
       // Retrieves current user's userChats each time it is updated
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
-        console.log("Chats updated")
+        console.log("User's chats updated")
       });
 
       return () => {
@@ -28,7 +28,8 @@ const Chats = () => {
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
-    console.log("Chats handleSelect", u)
+    console.log("Chats handleSelect userInfo")
+    console.log(u)
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
@@ -42,7 +43,7 @@ const Chats = () => {
           key={chat[0]}
           onClick={() => handleSelect(chat[1].userInfo)}
         >
-          <img src={chat[1].userInfo.photoURL} alt="" />
+          {chat[1].userInfo && <img src={chat[1].userInfo.photoURL} alt="" />}
           <div className="userChatInfo">
             <span>{chat[1].userInfo.displayName}</span>
             <p>{chat[1].lastMessage?.text}</p>

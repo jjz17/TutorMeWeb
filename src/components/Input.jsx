@@ -23,38 +23,46 @@ const Input = () => {
 
   const handleSend = async () => {
     if (img) {
-      const storageRef = ref(storage, uuid());
+      try {
+        const storageRef = ref(storage, uuid());
 
-      const uploadTask = uploadBytesResumable(storageRef, img);
+        const uploadTask = uploadBytesResumable(storageRef, img);
 
-      uploadTask.on(
-        (error) => {
-          //TODO:Handle Error
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await updateDoc(doc(db, "chats", data.chatId), {
-              messages: arrayUnion({
-                id: uuid(),
-                text,
-                senderId: currentUser.uid,
-                date: Timestamp.now(),
-                img: downloadURL,
-              }),
+        uploadTask.on(
+          (error) => {
+            //TODO:Handle Error
+          },
+          () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+              await updateDoc(doc(db, "chats", data.chatId), {
+                messages: arrayUnion({
+                  id: uuid(),
+                  text,
+                  senderId: currentUser.uid,
+                  date: Timestamp.now(),
+                  img: downloadURL,
+                }),
+              });
             });
-          });
-        }
-      );
+          }
+        );
+      } catch (err) {
+        console.log("Error sending image", err)
+      }
     } else {
-      await updateDoc(doc(db, "chats", data.chatId), {
-        // arrayUnion updates elements in array
-        messages: arrayUnion({
-          id: uuid(),
-          text,
-          senderId: currentUser.uid,
-          date: Timestamp.now(),
-        }),
-      });
+      try {
+        await updateDoc(doc(db, "chats", data.chatId), {
+          // arrayUnion updates elements in array
+          messages: arrayUnion({
+            id: uuid(),
+            text,
+            senderId: currentUser.uid,
+            date: Timestamp.now(),
+          }),
+        });
+      } catch (err) {
+        console.log("Error sending message", err)
+      }
     }
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
@@ -83,7 +91,7 @@ const Input = () => {
         value={text}
       />
       <div className="send">
-        <img src={Attach} alt="" />
+        {/* <img src={Attach} alt="" /> */}
         <input
           type="file"
           style={{ display: "none" }}
