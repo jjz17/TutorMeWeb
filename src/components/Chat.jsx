@@ -5,6 +5,7 @@ import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
 import { ChatContext } from "../context/ChatContext";
+import { useNavigate, Link } from "react-router-dom";
 
 const Chat = () => {
   const { data } = useContext(ChatContext);
@@ -13,6 +14,9 @@ const Chat = () => {
     <div className="chat">
       <div className="chatInfo">
         <span>{data.user?.displayName}</span>
+        <p>
+          <Link to="/next" style={{ color: '#FFF' }}>next</Link>
+        </p>
         <div className="chatIcons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />
