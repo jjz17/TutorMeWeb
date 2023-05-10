@@ -5,6 +5,7 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
+import StigmiLogo from "../img/stigmiLogo.png";
 
 const Register = () => {
   const [err, setErr] = useState(false);
@@ -71,7 +72,8 @@ const Register = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">Lama Chat</span>
+        <img src={StigmiLogo} alt="" />
+        {/* <span className="logo">Stigmi Learning</span> */}
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input required type="text" placeholder="display name" />
