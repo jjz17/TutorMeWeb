@@ -96,6 +96,25 @@
         @include tablet {
             width: 90%;
         }
+        .sidenav {
+            // flex: 1;
+            background-color: #6966a0;
+            // background-color: #7775ab;
+            position: relative;
+            padding: 30px;
+            justify-content: flex-start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            a {
+                // display: inline-block;
+                // vertical-align: top;
+                // line-height: 1;
+                // width: 10%;
+                display: contents;
+            }
+        }
         .sidebar {
             flex: 1;
             background-color: #3e3c61;
