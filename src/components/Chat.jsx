@@ -12,12 +12,12 @@ const Chat = () => {
 
   return (
     <div className="chat">
-      <div className="chatInfo">
+      <div className="chat-info">
         <span>{data.user?.displayName}</span>
         <p>
           <Link to="/next" style={{ color: '#FFF' }}>next</Link>
         </p>
-        <div className="chatIcons">
+        <div className="chat-icons">
           <img src={Cam} alt="" />
           <img src={Add} alt="" />
           <img src={More} alt="" />

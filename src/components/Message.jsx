@@ -17,7 +17,7 @@ const Message = ({ message }) => {
       ref={ref}
       className={`message ${message.senderId === currentUser.uid && "owner"}`}
     >
-      <div className="messageInfo">
+      <div className="message-info">
         <img
           src={
             message.senderId === currentUser.uid
@@ -29,7 +29,7 @@ const Message = ({ message }) => {
         {/* Update message send time here */}
         <span>just now</span>
       </div>
-      <div className="messageContent">
+      <div className="message-content">
         {/* This works if the message contains an image and blank text */}
         {/* {(message.text !== "") && <p>{message.text}</p>} */}
         <p>{message.text}</p>

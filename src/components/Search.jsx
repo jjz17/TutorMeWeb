@@ -92,7 +92,7 @@ const Search = () => {
 
   return (
     <div className="search">
-      <div className="searchForm">
+      <div className="search-form">
         <input
           type="text"
           placeholder="Find a user"
@@ -103,9 +103,9 @@ const Search = () => {
       </div>
       {err && <span>User not found!</span>}
       {user && (
-        <div className="userChat" onClick={() => handleSelect(user)}>
+        <div className="user-chat" onClick={() => handleSelect(user)}>
           <img src={user.photoURL} alt="" />
-          <div className="userChatInfo">
+          <div className="user-chat-info">
             <span>{user.displayName}</span>
           </div>
         </div>

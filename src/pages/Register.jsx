@@ -70,8 +70,8 @@ const Register = () => {
   };
 
   return (
-    <div className="formContainer">
-      <div className="formWrapper">
+    <div className="form-container">
+      <div className="form-wrapper">
         <img src={StigmiLogo} alt="" />
         {/* <span className="logo">Stigmi Learning</span> */}
         <span className="title">Register</span>
