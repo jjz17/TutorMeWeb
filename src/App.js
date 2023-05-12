@@ -1,6 +1,7 @@
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import CreateTicket from "./pages/CreateTicket";
 import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -29,6 +30,11 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/create-ticket" element={
+            <ProtectedRoute>
+              <CreateTicket />
+            </ProtectedRoute>
+          } />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>

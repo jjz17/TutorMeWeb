@@ -3,7 +3,8 @@ import Navbar from "./Navbar"
 import Search from "./Search"
 import Chats from "./Chats"
 import { useNavigate, Link } from "react-router-dom";
-import StigmiLogo from "../img/img.png";
+import CreateTicket from "../img/add.png";
+import Cam from "../img/cam.png";
 
 const Sidenav = () => {
     return (
@@ -13,21 +14,21 @@ const Sidenav = () => {
       <Chats/> */}
             {/* <p> */}
                 {/* <Link to="/next" style={{ color: '#FFF' }}> */}
-                <Link to="/next">
+                <Link to="/create-ticket">
                     {/* next */}
-                    <img src={StigmiLogo} alt=""/>
+                    <img src={CreateTicket} alt=""/>
                 </Link>
                 <Link to="/next">
                     {/* next */}
-                    <img src={StigmiLogo} alt=""/>
+                    <img src={Cam} alt=""/>
                 </Link>
                 <Link to="/next">
                     {/* next */}
-                    <img src={StigmiLogo} alt=""/>
+                    <img src={Cam} alt=""/>
                 </Link>
                 <Link to="/next">
                     {/* next */}
-                    <img src={StigmiLogo} alt=""/>
+                    <img src={Cam} alt=""/>
                 </Link>
             {/* </p> */}
 
