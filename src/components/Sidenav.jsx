@@ -26,9 +26,9 @@ const Sidenav = () => {
                     {/* next */}
                     <img src={Cam} alt=""/>
                 </Link>
-                <Link to="/next">
+                <Link to="/" style={{ color: '#FFF' }}>
                     {/* next */}
-                    <img src={Cam} alt=""/>
+                    Home
                 </Link>
             {/* </p> */}
 
