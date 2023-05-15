@@ -1,53 +1,23 @@
 import React from "react";
-import Navbar from "./Navbar"
-import Search from "./Search"
-import Chats from "./Chats"
-import { useNavigate, Link } from "react-router-dom";
-import CreateTicket from "../img/add.png";
-import Cam from "../img/cam.png";
+import { Link } from "react-router-dom";
+import { MessageCircle, PlusSquare, Calendar, Home } from 'react-feather';
 
 const Sidenav = () => {
     return (
         <div className="sidenav">
-            {/* <Navbar />
-      <Search/>
-      <Chats/> */}
-            {/* <p> */}
-                {/* <Link to="/next" style={{ color: '#FFF' }}> */}
-                <Link to="/create-ticket">
-                    {/* next */}
-                    <img src={CreateTicket} alt=""/>
-                </Link>
-                <Link to="/next">
-                    {/* next */}
-                    <img src={Cam} alt=""/>
-                </Link>
-                <Link to="/next">
-                    {/* next */}
-                    <img src={Cam} alt=""/>
-                </Link>
-                <Link to="/" style={{ color: '#FFF' }}>
-                    {/* next */}
-                    Home
-                </Link>
-            {/* </p> */}
-
-            {/* <input
-                type="file"
-                style={{ display: "none" }}
-                id="file"
-                onChange={(e) => e}
-            />
-            <label htmlFor="next">
-                <img src={"../img/img.png"} alt="" />
-            </label> */}
-            {/* <img src={StigmiLogo} alt="" height={80}/>
-      <span className="logo">Lama Chat</span>
-      <div className="user">
-        <img src={currentUser.photoURL} alt="" />
-        <span>{currentUser.displayName}</span>
-        <button onClick={() => signOut(auth)}>logout</button>
-      </div> */}
+            <Link to="/chats">
+                <MessageCircle color='#ffffff' />
+            </Link>
+            <Link to="/create-ticket">
+                <PlusSquare color="#ffffff" />
+            </Link>
+            <Link to="/planner">
+                <Calendar color="#ffffff" />
+                {/* <img src={Cam} alt="" /> */}
+            </Link>
+            <Link to="/" style={{ color: '#FFF' }}>
+                <Home color="#ffffff" />
+            </Link>
         </div>
     );
 };

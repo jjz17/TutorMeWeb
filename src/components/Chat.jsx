@@ -13,15 +13,10 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat-info">
-        <span>{data.user?.displayName}</span>
         <p>
-          <Link to="/next" style={{ color: '#FFF' }}>next</Link>
+          Chat
         </p>
-        <div className="chat-icons">
-          <img src={Cam} alt="" />
-          <img src={Add} alt="" />
-          <img src={More} alt="" />
-        </div>
+        {data.user.displayName && (<span>: with {data.user?.displayName}</span>)}
       </div>
       <Messages />
       <Input/>
