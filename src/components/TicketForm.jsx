@@ -38,17 +38,18 @@ const TicketForm = () => {
           //TODO:Handle Error
         },
         () => {
-          // getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-          //   await updateDoc(doc(db, "chats", data.chatId), {
-          //     messages: arrayUnion({
-          //       id: uuid(),
-          //       text,
-          //       senderId: currentUser.uid,
-          //       date: Timestamp.now(),
-          //       img: downloadURL,
-          //     }),
-          //   });
-          // });
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            // Add ticket to current user's ticket list
+            await updateDoc(doc(db, "userTickets", currentUser.uid), {
+              tickets: arrayUnion({
+                id: uuid(),
+                description: description,
+                tutorId: null,
+                date: Timestamp.now(),
+                img: downloadURL,
+              }),
+            });
+          });
           console.log("Ticket image uploaded")
         }
       );

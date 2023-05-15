@@ -54,6 +54,11 @@ const Register = () => {
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
             console.log("userChats created for user on firestore")
+
+            //create empty user tickets on firestore
+            await setDoc(doc(db, "userTickets", res.user.uid), { tickets: [] });
+            console.log("userTickets created for user on firestore")
+
             navigate("/");
           } catch (err) {
             console.log(err);
