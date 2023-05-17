@@ -38,15 +38,20 @@ const TicketForm = () => {
           //TODO:Handle Error
         },
         () => {
+          const ticketId = uuid();
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            //create ticket on firestore
+            await setDoc(doc(db, "tickets", ticketId), {
+              description: description,
+              tutorId: null,
+              date: Timestamp.now(),
+              img: downloadURL,
+            });
+
             // Add ticket to current user's ticket list
             await updateDoc(doc(db, "userTickets", currentUser.uid), {
               tickets: arrayUnion({
-                id: uuid(),
-                description: description,
-                tutorId: null,
-                date: Timestamp.now(),
-                img: downloadURL,
+                id: ticketId
               }),
             });
           });
@@ -58,6 +63,7 @@ const TicketForm = () => {
       setErrorMessage(err.message);
       setLoading(false);
     }
+    setLoading(false);
   };
 
   return (
