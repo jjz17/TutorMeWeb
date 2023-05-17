@@ -6,6 +6,7 @@ import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Chats from "./components/Chats";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -30,9 +31,19 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route path="/chats" element={
+            <ProtectedRoute>
+              {/* <Chats /> */}
+            </ProtectedRoute>
+          } />
           <Route path="/create-ticket" element={
             <ProtectedRoute>
               <CreateTicket />
+            </ProtectedRoute>
+          } />
+          <Route path="/planner" element={
+            <ProtectedRoute>
+              {/* <Planner /> */}
             </ProtectedRoute>
           } />
           <Route path="login" element={<Login />} />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MessageCircle, PlusSquare, Calendar, Home } from 'react-feather';
+import { MessageCircle, PlusSquare, Calendar, Search, Home } from 'react-feather';
 
 const Sidenav = () => {
     return (
@@ -14,6 +14,9 @@ const Sidenav = () => {
             <Link to="/planner">
                 <Calendar color="#ffffff" />
                 {/* <img src={Cam} alt="" /> */}
+            </Link>
+            <Link to="/search">
+                <Search color="#ffffff" />
             </Link>
             <Link to="/" style={{ color: '#FFF' }}>
                 <Home color="#ffffff" />
