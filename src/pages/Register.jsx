@@ -6,12 +6,18 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import StigmiLogo from "../img/stigmiLogo.png";
+import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 const Register = () => {
+  const [role, setRole] = useState("student");
   const [err, setErr] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  const handleRoleChange = (value) => {
+    setRole(value);
+  };
 
   const handleSubmit = async (e) => {
     setLoading(true);
@@ -46,6 +52,7 @@ const Register = () => {
             await setDoc(doc(db, "webUsers", res.user.uid), {
               uid: res.user.uid,
               displayName,
+              role,
               email,
               photoURL: downloadURL,
             });
@@ -84,7 +91,10 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          {/* <input required style={{ display: "none" }} type="file" id="file" /> */}
+          <RadioGroup onChange={handleRoleChange} value={role}>
+            <RadioButton value="student">Student</RadioButton>
+            <RadioButton value="tutor">Tutor</RadioButton>
+          </RadioGroup>
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
             <img src={Add} alt="" />
