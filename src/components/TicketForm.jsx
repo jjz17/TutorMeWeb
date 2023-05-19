@@ -50,7 +50,7 @@ const TicketForm = () => {
 
             // Add ticket to current user's ticket list
             await updateDoc(doc(db, "userTickets", currentUser.uid), {
-              tickets: arrayUnion({
+              open: arrayUnion({
                 id: ticketId
               }),
             });
