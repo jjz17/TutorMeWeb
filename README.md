@@ -14,6 +14,12 @@ Copy the `.env` file to your root folder and start: it should run on [localhost]
 npm start
 ```
 
+Also run the following for pre-commit hooks:
+
+```sh
+pre-commit install
+```
+
 ## Firebase
 
 - Each chat has its own ticket
