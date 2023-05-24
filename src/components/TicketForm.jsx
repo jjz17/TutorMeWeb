@@ -51,12 +51,12 @@ const TicketForm = () => {
             // Add ticket to current user's ticket list
             await updateDoc(doc(db, "userTickets", currentUser.uid), {
               open: arrayUnion({
-                id: ticketId
+                id: ticketId,
               }),
             });
           });
-          console.log("Ticket image uploaded")
-        }
+          console.log("Ticket image uploaded");
+        },
       );
     } catch (err) {
       setErr(true);
@@ -72,14 +72,21 @@ const TicketForm = () => {
         <div className="form-wrapper">
           {/* <img src={StigmiLogo} alt="" /> */}
           {/* <span className="logo">Stigmi Learning</span> */}
-          <span className="title">We're here to help! Submit a question here to be answered during working hours</span>
+          <span className="title">
+            We're here to help! Submit a question here to be answered during
+            working hours
+          </span>
           <form onSubmit={handleSubmit}>
             <input style={{ display: "none" }} type="file" id="file" />
             <label htmlFor="file">
               {/* <img src={Add} alt="" /> */}
               <span>Attach a file</span>
             </label>
-            <input required type="text" placeholder="Brief problem description" />
+            <input
+              required
+              type="text"
+              placeholder="Brief problem description"
+            />
             <button disabled={loading}>Submit</button>
             {loading && "Creating the ticket..."}
             {err && <span>Something went wrong</span>}

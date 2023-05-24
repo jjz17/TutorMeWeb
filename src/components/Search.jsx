@@ -25,7 +25,7 @@ const Search = () => {
   const handleSearch = async () => {
     const q = query(
       collection(db, "webUsers"),
-      where("displayName", "==", username)
+      where("displayName", "==", username),
     );
 
     try {
@@ -50,7 +50,7 @@ const Search = () => {
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
 
-    console.log("Ran Chats handleSelect", u)
+    console.log("Ran Chats handleSelect", u);
     dispatch({ type: "CHANGE_USER", payload: u });
 
     try {
@@ -59,7 +59,7 @@ const Search = () => {
       if (!res.exists()) {
         // create a chat in chats collection
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
-        console.log("Created chat")
+        console.log("Created chat");
 
         // create user chat for current user
         await updateDoc(doc(db, "userChats", currentUser.uid), {
@@ -70,7 +70,7 @@ const Search = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        console.log("Created current user userChat")
+        console.log("Created current user userChat");
 
         // create user chat for other user
         await updateDoc(doc(db, "userChats", user.uid), {
@@ -81,13 +81,13 @@ const Search = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        console.log("Created other user userChat")
+        console.log("Created other user userChat");
       }
     } catch (err) {}
 
     // Reset search query
     setUser(null);
-    setUsername("")
+    setUsername("");
   };
 
   return (

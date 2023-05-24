@@ -13,13 +13,11 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat-info">
-        <p>
-          Chat
-        </p>
-        {data.user.displayName && (<span>: with {data.user?.displayName}</span>)}
+        <p>Chat</p>
+        {data.user.displayName && <span>: with {data.user?.displayName}</span>}
       </div>
       <Messages />
-      <Input/>
+      <Input />
     </div>
   );
 };

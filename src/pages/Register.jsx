@@ -6,7 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import StigmiLogo from "../img/stigmiLogo.png";
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
+import { RadioGroup, RadioButton } from "react-radio-buttons";
 
 const Register = () => {
   const [role, setRole] = useState("student");
@@ -28,12 +28,12 @@ const Register = () => {
     const file = e.target[3].files[0];
 
     try {
-      console.log("Haven't created user")
+      console.log("Haven't created user");
 
       //Create user
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
-      console.log("Created user")
+      console.log("Created user");
 
       //Create a unique image name
       const date = new Date().getTime();
@@ -56,16 +56,19 @@ const Register = () => {
               email,
               photoURL: downloadURL,
             });
-            console.log("User created on firestore")
+            console.log("User created on firestore");
 
             //create empty user chats on firestore
             await setDoc(doc(db, "userChats", res.user.uid), {});
-            console.log("userChats created for user on firestore")
+            console.log("userChats created for user on firestore");
 
             //create empty user tickets on firestore if user is student
             if (role === "student") {
-              await setDoc(doc(db, "userTickets", res.user.uid), { open: [], closed: [] });
-              console.log("userTickets created for user on firestore")
+              await setDoc(doc(db, "userTickets", res.user.uid), {
+                open: [],
+                closed: [],
+              });
+              console.log("userTickets created for user on firestore");
             }
 
             navigate("/");

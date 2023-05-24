@@ -16,7 +16,7 @@ const Chats = () => {
       // Retrieves current user's userChats each time it is updated
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
-        console.log("User's chats updated")
+        console.log("User's chats updated");
       });
 
       return () => {
@@ -28,28 +28,32 @@ const Chats = () => {
   }, [currentUser.uid]);
 
   const handleSelect = (u) => {
-    console.log("Chats handleSelect userInfo")
-    console.log(u)
+    console.log("Chats handleSelect userInfo");
+    console.log(u);
     dispatch({ type: "CHANGE_USER", payload: u });
   };
 
   return (
     <div className="chats">
-      
-      {chats && Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
-      // {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
-        <div
-          className="user-chat"
-          key={chat[0]}
-          onClick={() => handleSelect(chat[1].userInfo)}
-        >
-          {chat[1].userInfo && <img src={chat[1].userInfo.photoURL} alt="" />}
-          <div className="user-chat-info">
-            <span>{chat[1].userInfo.displayName}</span>
-            <p>{chat[1].lastMessage?.text}</p>
-          </div>
-        </div>
-      ))}
+      {chats &&
+        Object.entries(chats)
+          ?.sort((a, b) => b[1].date - a[1].date)
+          .map((chat) => (
+            // {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
+            <div
+              className="user-chat"
+              key={chat[0]}
+              onClick={() => handleSelect(chat[1].userInfo)}
+            >
+              {chat[1].userInfo && (
+                <img src={chat[1].userInfo.photoURL} alt="" />
+              )}
+              <div className="user-chat-info">
+                <span>{chat[1].userInfo.displayName}</span>
+                <p>{chat[1].lastMessage?.text}</p>
+              </div>
+            </div>
+          ))}
     </div>
   );
 };

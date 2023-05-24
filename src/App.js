@@ -16,7 +16,7 @@ function App() {
       return <Navigate to="/login" />;
     }
 
-    return children
+    return children;
   };
 
   return (
@@ -31,21 +31,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/chats" element={
-            <ProtectedRoute>
-              {/* <Chats /> */}
-            </ProtectedRoute>
-          } />
-          <Route path="/create-ticket" element={
-            <ProtectedRoute>
-              <CreateTicket />
-            </ProtectedRoute>
-          } />
-          <Route path="/planner" element={
-            <ProtectedRoute>
-              {/* <Planner /> */}
-            </ProtectedRoute>
-          } />
+          <Route
+            path="/chats"
+            element={<ProtectedRoute>{/* <Chats /> */}</ProtectedRoute>}
+          />
+          <Route
+            path="/create-ticket"
+            element={
+              <ProtectedRoute>
+                <CreateTicket />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/planner"
+            element={<ProtectedRoute>{/* <Planner /> */}</ProtectedRoute>}
+          />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>

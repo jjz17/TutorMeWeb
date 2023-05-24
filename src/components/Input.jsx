@@ -33,21 +33,23 @@ const Input = () => {
             //TODO:Handle Error
           },
           () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-              await updateDoc(doc(db, "chats", data.chatId), {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text,
-                  senderId: currentUser.uid,
-                  date: Timestamp.now(),
-                  img: downloadURL,
-                }),
-              });
-            });
-          }
+            getDownloadURL(uploadTask.snapshot.ref).then(
+              async (downloadURL) => {
+                await updateDoc(doc(db, "chats", data.chatId), {
+                  messages: arrayUnion({
+                    id: uuid(),
+                    text,
+                    senderId: currentUser.uid,
+                    date: Timestamp.now(),
+                    img: downloadURL,
+                  }),
+                });
+              },
+            );
+          },
         );
       } catch (err) {
-        console.log("Error sending image", err)
+        console.log("Error sending image", err);
       }
     } else {
       try {
@@ -61,7 +63,7 @@ const Input = () => {
           }),
         });
       } catch (err) {
-        console.log("Error sending message", err)
+        console.log("Error sending message", err);
       }
     }
 
