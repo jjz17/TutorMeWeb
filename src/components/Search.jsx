@@ -25,7 +25,7 @@ const Search = () => {
   const handleSearch = async () => {
     const q = query(
       collection(db, "webUsers"),
-      where("displayName", "==", username),
+      where("displayName", "==", username)
     );
 
     try {

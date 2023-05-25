@@ -71,7 +71,7 @@ const Register = () => {
               console.log("userTickets created for user on firestore");
             }
 
-            navigate("/");
+            navigate("/dashboard");
           } catch (err) {
             console.log(err);
             setErr(true);

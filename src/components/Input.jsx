@@ -44,9 +44,9 @@ const Input = () => {
                     img: downloadURL,
                   }),
                 });
-              },
+              }
             );
-          },
+          }
         );
       } catch (err) {
         console.log("Error sending image", err);

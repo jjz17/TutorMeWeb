@@ -1,18 +1,17 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import Chat from "../components/Chat";
-import SideNav from "../components/Sidenav";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
+import { Navigate } from "react-router-dom";
 
 const Home = () => {
-  return (
-    <div className="home">
-      <div className="container">
-        <SideNav />
-        <Sidebar />
-        <Chat />
-      </div>
-    </div>
-  );
+  // send to dashboard if logged in
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    return <Navigate to="/dashboard" />;
+  }
+
+  // otherwise go to the login page
+  return <Navigate to="/login" />;
 };
 
 export default Home;
