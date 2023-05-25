@@ -56,7 +56,7 @@ const TicketForm = () => {
             });
           });
           console.log("Ticket image uploaded");
-        },
+        }
       );
     } catch (err) {
       setErr(true);
