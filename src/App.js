@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateTicket from "./pages/CreateTicket";
+import TutorView from "./pages/TutorView";
 import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
@@ -13,6 +14,24 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+
+    return children;
+  };
+
+  const TutorRoute = ({ children }) => {
+    // TODO: Also check for tutor role
+    if (!currentUser) {
+      return <Navigate to="/login" />;
+    }
+
+    return children;
+  };
+
+  const StudentRoute = ({ children }) => {
+    // TODO: Also check for student role
     if (!currentUser) {
       return <Navigate to="/login" />;
     }
@@ -37,6 +56,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutors"
+            element={
+              <ProtectedRoute>
+                <TutorView />
               </ProtectedRoute>
             }
           />
