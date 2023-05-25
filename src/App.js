@@ -67,14 +67,6 @@ function App() {
               <Route path="/search" />
             </>
           )}
-          {/* {role === null && (
-            <>
-            <Route path="/chats" element={<Tickets />} />
-            <Route path="/create-ticket" element={<CreateTicket />} />
-              <Route path="/planner" />
-              <Route path="/search" />
-            </>
-          )} */}
           <Route path="/chats" element={<Tickets />} />
           <Route path="/create-ticket" element={<CreateTicket />} />
           <Route path="login" element={<Login />} />

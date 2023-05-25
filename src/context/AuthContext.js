@@ -6,13 +6,13 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
-  const [role, setRole] = useState(null);
+  // const [role, setRole] = useState(null);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       console.log("Auth state changed", user);
-      
+
     });
 
     return () => {
