@@ -1,17 +1,19 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
+import { doc, query, collection, where, onSnapshot } from "firebase/firestore";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
+  const [profile, setProfile] = useState(null);
   // const [role, setRole] = useState(null);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
-      console.log("Auth state changed", user);
+      console.log("AUTH Auth state changed", user);
 
     });
 
@@ -20,8 +22,41 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
+
+  useEffect(() => {
+    let unsub;
+
+    const fetchWebUser = async () => {
+        if (currentUser) {
+            // const webUserRef = collection('webUsers').doc(currentUser.uid);
+            // unsub = webUserRef.onSnapshot((doc) => {
+            //     if (doc.exists) {
+            //         setProfile(doc.data());
+            //     } else {
+            //         setProfile(null);
+            //     }
+            // });
+            unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
+                setProfile(doc.data());
+                console.log("Profile updated");
+                console.log(profile)
+              });
+        }
+    };
+
+    fetchWebUser();
+
+    return () => {
+        if (unsub) {
+            unsub();
+        }
+    };
+}, [currentUser]);
+
+
+
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, profile }}>
       {children}
     </AuthContext.Provider>
   );

@@ -7,37 +7,26 @@ import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import { RoleContext } from "./context/RoleContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import Chats from "./components/Chats";
 import Sidenav from "./components/Sidenav";
 
-// Function to query a document in the "webUsers" collection by UID
-async function getUserRole(uid) {
-  try {
-    const docRef = doc(db, 'webUsers', uid);
-    const docSnapshot = await getDoc(docRef);
-
-    if (docSnapshot.exists()) {
-      const documentData = docSnapshot.data();
-      console.log('Document data:', documentData.role);
-      return documentData.role;
-    } else {
-      console.log('Document does not exist.');
-      return null;
-    }
-  } catch (error) {
-    console.error('Error querying document:', error);
-    throw error;
-  }
-}
-
 function App() {
-  const { currentUser } = useContext(AuthContext);
-  // const role = currentUser ? getUserRole(currentUser.uid).then((role) => role) : null;
-  const role = getUserRole(currentUser.uid);
-  console.log(currentUser)
-  console.log(role)
+  const { currentUser, role } = useContext(AuthContext);
+  // const { currentUser, role } = useContext(RoleContext);
+  // const { currentUser } = useContext(RoleContext);
+  // const currentUser = role;
+  // const role = currentUser;
+  console.log("CurrUSer is ", currentUser)
+  console.log("Role is", role)
+
+  // const userRole = useContext(RoleContext);
+  // const currentUser = userRole;
+  // const role = userRole;
+  // console.log(userRole)
+
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
@@ -53,7 +42,7 @@ function App() {
         <Route path="/">
           {role === 'tutor' && (
             <>
-              <Route path="/chats" element={<Tickets />} />
+              {/* <Route path="/chats" element={<Tickets />} /> */}
               <Route path="/create-ticket" element={<CreateTicket />} />
               <Route path="/planner" />
               <Route path="/search" />
@@ -61,13 +50,13 @@ function App() {
           )}
           {role === 'student' && (
             <>
-            <Route path="/chats" element={<Tickets />} />
-            <Route path="/create-ticket" element={<CreateTicket />} />
+              {/* <Route path="/chats" element={<Tickets />} /> */}
+              <Route path="/create-ticket" element={<CreateTicket />} />
               <Route path="/planner" />
               <Route path="/search" />
             </>
           )}
-          <Route path="/chats" element={<Tickets />} />
+          {/* <Route path="/chats" element={<Tickets />} /> */}
           <Route path="/create-ticket" element={<CreateTicket />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
