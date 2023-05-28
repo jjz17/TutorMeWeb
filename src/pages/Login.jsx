@@ -23,17 +23,23 @@ const Login = () => {
   return (
     <div className="form-container">
       <div className="form-wrapper">
-        <img src={StigmiLogo} alt="" />
+        <img id="login-logo" src={StigmiLogo} alt="" />
         {/* <span className="logo">Stigmi Learning</span> */}
-        <span className="title">Login</span>
+        <span className="title">Login to Stigmi Learning below!</span>
         <form onSubmit={handleSubmit}>
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
+        <span>
+          <p>Email</p>
+          <input class="form-feild" type="email" placeholder="email" />
+        </span>
+        <span>
+          <p>Password</p>
+          <input class="form-feild" type="password" placeholder="password" />
+        </span>
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}
         </form>
         <p>
-          You don't have an account? <Link to="/register">Register</Link>
+          Don't have an account? <Link to="/register">Register</Link>
         </p>
       </div>
     </div>
