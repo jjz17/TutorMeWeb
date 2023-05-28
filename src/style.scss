@@ -19,6 +19,7 @@ $base-color: rgba(47,60,126);
 $light-accent: #DEE0EA;
 $off-white:#F3F3F3;
 $off-black: #111114;
+
 .form-container {
   background-color: $base-color;
   height: 100vh;
@@ -98,8 +99,16 @@ $off-black: #111114;
       margin-top: 10px;
     }
   }
+  .radio-label {
+    color:#5d5b8d;
+  }
 }
-
+.register-container {
+  height:80vh;
+  #register-logo{
+    width:150px;
+  }
+}
 .home,
 .create-ticket {
   background-color: #a7bcff;
