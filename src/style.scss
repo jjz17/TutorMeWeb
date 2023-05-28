@@ -17,7 +17,8 @@
 }
 $base-color: rgba(47,60,126);
 $light-accent: #DEE0EA;
-
+$off-white:#F3F3F3;
+$off-black: #111114;
 .form-container {
   background-color: $base-color;
   height: 100vh;
@@ -108,9 +109,8 @@ $light-accent: #DEE0EA;
   justify-content: center;
   .container {
     border: 1px solid white;
-    border-radius: 10px;
-    width: 65%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     display: flex;
     overflow: hidden;
     @include tablet {
@@ -118,8 +118,7 @@ $light-accent: #DEE0EA;
     }
     .sidenav {
       // flex: 1;
-      background-color: #6966a0;
-      // background-color: #7775ab;
+      background-color: $base-color;
       position: relative;
       padding: 30px;
       justify-content: flex-start;
@@ -137,18 +136,21 @@ $light-accent: #DEE0EA;
     }
     .sidebar {
       flex: 1;
-      background-color: #3e3c61;
+      background-color: $off-white;
       // background-color: #7775ab;
       position: relative;
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
       .navbar {
         display: flex;
         align-items: center;
         // background-color: #2f2d52;
-        background-color: #7775ab;
+        background-color:$off-white;
         height: 50px;
         padding: 10px;
         justify-content: space-between;
-        color: #ddddf7;
+        color: $base-color;
+        font-size:20px;
+        box-shadow: rgba(124, 124, 124, 0.2) 0px 18px 20px -10px;
         .logo {
           font-weight: bold;
           @include tablet {
@@ -168,9 +170,16 @@ $light-accent: #DEE0EA;
           button {
             background-color: #5d5b8d;
             color: #ddddf7;
-            font-size: 10px;
+            font-size: 12px;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            &:hover{
+              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+              background-color: $base-color;
+              
+            }
             @include tablet {
               position: absolute;
               bottom: 10px;
@@ -225,12 +234,15 @@ $light-accent: #DEE0EA;
       flex: 2;
       .chat-info {
         height: 50px;
-        background-color: #5d5b8d;
+        background-color: $off-white;
         display: flex;
         align-items: center;
         justify-content: flex-start;
         padding: 10px;
-        color: lightgray;
+        color: $off-black;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 2px 1px, rgba(0, 0, 0, 0.19) 0px 4px 2px, rgba(0, 0, 0, 0.19) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.19) 0px 32px 16px;
+        font-weight: 600;
+        font-size: 30px;
         p {
           margin-left: 20px;
         }
@@ -244,7 +256,7 @@ $light-accent: #DEE0EA;
         }
       }
       .messages {
-        background-color: #ddddf7;
+        background-color: #DEE0EA;
         padding: 10px;
         height: calc(100% - 160px);
         overflow: scroll;
@@ -322,7 +334,14 @@ $light-accent: #DEE0EA;
             padding: 10px 15px;
             color: white;
             background-color: #8da4f1;
+            border-radius: 7px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
             cursor: pointer;
+            &:hover {
+              background-color: $base-color;
+              box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+              
+            }
           }
         }
       }
