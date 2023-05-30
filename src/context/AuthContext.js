@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, query, collection, where, onSnapshot } from "firebase/firestore";
+import { doc, query, collection, where, onSnapshot, getDoc } from "firebase/firestore";
 
 export const AuthContext = createContext();
 
@@ -27,31 +27,32 @@ export const AuthContextProvider = ({ children }) => {
     let unsub;
 
     const fetchWebUser = async () => {
-        if (currentUser) {
-            // const webUserRef = collection('webUsers').doc(currentUser.uid);
-            // unsub = webUserRef.onSnapshot((doc) => {
-            //     if (doc.exists) {
-            //         setProfile(doc.data());
-            //     } else {
-            //         setProfile(null);
-            //     }
-            // });
-            unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
-                setProfile(doc.data());
-                console.log("Profile updated");
-                console.log(profile)
-              });
-        }
+      if (currentUser) {
+        // const webUserRef = collection('webUsers').doc(currentUser.uid);
+        // unsub = webUserRef.onSnapshot((doc) => {
+        //     if (doc.exists) {
+        //         setProfile(doc.data());
+        //     } else {
+        //         setProfile(null);
+        //     }
+        // });
+        unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
+          console.log("UID:", currentUser.uid)
+          setProfile(doc.data());
+          console.log("Profile updated");
+          console.log(profile)
+        });
+      }
     };
 
     fetchWebUser();
 
     return () => {
-        if (unsub) {
-            unsub();
-        }
+      if (unsub) {
+        unsub();
+      }
     };
-}, [currentUser]);
+  }, [currentUser]);
 
 
 
