@@ -11,7 +11,7 @@ import Chats from "./components/Chats";
 
 function App() {
   const { currentUser, profile } = useContext(AuthContext);
-  console.log("Profile data from AuthContext:", profile)
+  console.log("Profile data from AuthContext:", profile);
 
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {

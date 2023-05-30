@@ -1,7 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { doc, query, collection, where, onSnapshot, getDoc } from "firebase/firestore";
+import {
+  doc,
+  query,
+  collection,
+  where,
+  onSnapshot,
+  getDoc,
+} from "firebase/firestore";
 
 export const AuthContext = createContext();
 
@@ -20,7 +27,6 @@ export const AuthContextProvider = ({ children }) => {
     };
   }, []);
 
-
   useEffect(() => {
     let unsub;
 
@@ -29,7 +35,9 @@ export const AuthContextProvider = ({ children }) => {
         unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
           setProfile(doc.data());
           console.log("Profile updated");
-          {profile &&  console.log("Current User Role:", profile.role)}
+          {
+            profile && console.log("Current User Role:", profile.role);
+          }
         });
       }
     };
@@ -42,8 +50,6 @@ export const AuthContextProvider = ({ children }) => {
       }
     };
   }, [currentUser]);
-
-
 
   return (
     <AuthContext.Provider value={{ currentUser, profile }}>
