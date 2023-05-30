@@ -15,9 +15,9 @@
     @content;
   }
 }
-$base-color: rgba(47,60,126);
-$light-accent: #DEE0EA;
-$off-white:#F3F3F3;
+$base-color: rgba(47, 60, 126);
+$light-accent: #dee0ea;
+$off-white: #f3f3f3;
 $off-black: #111114;
 
 .form-container {
@@ -40,17 +40,17 @@ $off-black: #111114;
       font-weight: bold;
       font-size: 24px;
     }
-    
-    .p{
+
+    .p {
       color: $base-color;
-      font:11px;
+      font: 11px;
     }
     .title {
       color: $base-color;
       font-size: 18px;
     }
-    #login-logo{
-      width:375px;
+    #login-logo {
+      width: 375px;
     }
     form {
       display: flex;
@@ -100,13 +100,13 @@ $off-black: #111114;
     }
   }
   .radio-label {
-    color:#5d5b8d;
+    color: #5d5b8d;
   }
 }
 .register-container {
-  height:80vh;
-  #register-logo{
-    width:150px;
+  height: 80vh;
+  #register-logo {
+    width: 150px;
   }
 }
 .home,
@@ -148,17 +148,19 @@ $off-black: #111114;
       background-color: $off-white;
       // background-color: #7775ab;
       position: relative;
-      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+      box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px,
+        rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+        rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
       .navbar {
         display: flex;
         align-items: center;
         // background-color: #2f2d52;
-        background-color:$off-white;
+        background-color: $off-white;
         height: 50px;
         padding: 10px;
         justify-content: space-between;
         color: $base-color;
-        font-size:20px;
+        font-size: 20px;
         box-shadow: rgba(124, 124, 124, 0.2) 0px 18px 20px -10px;
         .logo {
           font-weight: bold;
@@ -184,10 +186,9 @@ $off-black: #111114;
             border-radius: 5px;
             cursor: pointer;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-            &:hover{
+            &:hover {
               box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
               background-color: $base-color;
-              
             }
             @include tablet {
               position: absolute;
@@ -249,7 +250,9 @@ $off-black: #111114;
         justify-content: flex-start;
         padding: 10px;
         color: $off-black;
-        box-shadow: rgba(0, 0, 0, 0.19) 0px 2px 1px, rgba(0, 0, 0, 0.19) 0px 4px 2px, rgba(0, 0, 0, 0.19) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.19) 0px 32px 16px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 2px 1px,
+          rgba(0, 0, 0, 0.19) 0px 4px 2px, rgba(0, 0, 0, 0.19) 0px 8px 4px,
+          rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.19) 0px 32px 16px;
         font-weight: 600;
         font-size: 30px;
         p {
@@ -265,7 +268,7 @@ $off-black: #111114;
         }
       }
       .messages {
-        background-color: #DEE0EA;
+        background-color: #dee0ea;
         padding: 10px;
         height: calc(100% - 160px);
         overflow: scroll;
@@ -349,7 +352,6 @@ $off-black: #111114;
             &:hover {
               background-color: $base-color;
               box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-              
             }
           }
         }

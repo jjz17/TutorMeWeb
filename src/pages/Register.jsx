@@ -93,21 +93,25 @@ const Register = () => {
         {/* <span className="logo">Stigmi Learning</span> */}
         <span className="title">Register for Stigmi Learning here!</span>
         <form onSubmit={handleSubmit}>
-        <span>
-          <p>Display Name</p>
-          <input required type="text" placeholder="display name" />
-        </span>
-        <span>
-          <p>Email</p>
-          <input required type="email" placeholder="email" />
-        </span>
-        <span>
-        <p>Password</p>
-          <input required type="password" placeholder="password" />
-        </span>
+          <span>
+            <p>Display Name</p>
+            <input required type="text" placeholder="display name" />
+          </span>
+          <span>
+            <p>Email</p>
+            <input required type="email" placeholder="email" />
+          </span>
+          <span>
+            <p>Password</p>
+            <input required type="password" placeholder="password" />
+          </span>
           <RadioGroup onChange={handleRoleChange} value={role}>
-            <RadioButton class="radio-label" value="student">Student</RadioButton>
-            <RadioButton class="radio-label" value="tutor">Tutor</RadioButton>
+            <RadioButton class="radio-label" value="student">
+              Student
+            </RadioButton>
+            <RadioButton class="radio-label" value="tutor">
+              Tutor
+            </RadioButton>
           </RadioGroup>
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
