@@ -27,14 +27,14 @@ const Login = () => {
         {/* <span className="logo">Stigmi Learning</span> */}
         <span className="title">Login to Stigmi Learning below!</span>
         <form onSubmit={handleSubmit}>
-        <span>
-          <p>Email</p>
-          <input class="form-feild" type="email" placeholder="email" />
-        </span>
-        <span>
-          <p>Password</p>
-          <input class="form-feild" type="password" placeholder="password" />
-        </span>
+          <span>
+            <p>Email</p>
+            <input class="form-feild" type="email" placeholder="email" />
+          </span>
+          <span>
+            <p>Password</p>
+            <input class="form-feild" type="password" placeholder="password" />
+          </span>
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}
         </form>
