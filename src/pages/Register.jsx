@@ -87,18 +87,31 @@ const Register = () => {
   };
 
   return (
-    <div className="form-container">
-      <div className="form-wrapper">
-        <img src={StigmiLogo} alt="" />
+    <div className="form-container ">
+      <div className="form-wrapper register-container">
+        <img id="register-logo" src={StigmiLogo} alt="" />
         {/* <span className="logo">Stigmi Learning</span> */}
-        <span className="title">Register</span>
+        <span className="title">Register for Stigmi Learning here!</span>
         <form onSubmit={handleSubmit}>
-          <input required type="text" placeholder="display name" />
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="password" />
+          <span>
+            <p>Display Name</p>
+            <input required type="text" placeholder="display name" />
+          </span>
+          <span>
+            <p>Email</p>
+            <input required type="email" placeholder="email" />
+          </span>
+          <span>
+            <p>Password</p>
+            <input required type="password" placeholder="password" />
+          </span>
           <RadioGroup onChange={handleRoleChange} value={role}>
-            <RadioButton value="student">Student</RadioButton>
-            <RadioButton value="tutor">Tutor</RadioButton>
+            <RadioButton class="radio-label" value="student">
+              Student
+            </RadioButton>
+            <RadioButton class="radio-label" value="tutor">
+              Tutor
+            </RadioButton>
           </RadioGroup>
           <input style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
@@ -111,7 +124,7 @@ const Register = () => {
           {err && <span>{errorMessage}</span>}
         </form>
         <p>
-          You do have an account? <Link to="/login">Login</Link>
+          Have an account? <Link to="/login">Login</Link>
         </p>
       </div>
     </div>
