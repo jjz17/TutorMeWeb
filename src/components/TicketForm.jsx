@@ -43,7 +43,8 @@ const TicketForm = () => {
             //create ticket on firestore
             await setDoc(doc(db, "tickets", ticketId), {
               description: description,
-              tutorId: null,
+              // Store tutorId information in ticketChats instead??
+              // tutorId: null,
               date: Timestamp.now(),
               img: downloadURL,
             });
@@ -54,6 +55,24 @@ const TicketForm = () => {
                 id: ticketId,
               }),
             });
+
+            // Create ticket chat room
+            await setDoc(doc(db, "ticketChats", ticketId), {
+              studentId: currentUser.uid,
+              tutorId: null,
+              messages: [],
+            });
+            console.log("ticketChats created for ticket on firestore");
+
+            // await updateDoc(doc(db, "userChats", currentUser.uid), {
+            //   [combinedId + ".userInfo"]: {
+            //     uid: user.uid,
+            //     displayName: user.displayName,
+            //     photoURL: user.photoURL,
+            //   },
+            //   [combinedId + ".date"]: serverTimestamp(),
+            // });
+
           });
           console.log("Ticket image uploaded");
         }
