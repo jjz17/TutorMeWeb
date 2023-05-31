@@ -6,14 +6,20 @@ import CreateTicket from "./pages/CreateTicket";
 import TutorView from "./pages/TutorView";
 import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Chats from "./components/Chats";
 
 function App() {
   const { currentUser, profile } = useContext(AuthContext);
+  console.log("User data from AuthContext:", currentUser);
   console.log("Profile data from AuthContext:", profile);
 
+  // const [profile] = useState(false);
+
+  // useEffect(() => {
+
+  // })
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
@@ -22,19 +28,30 @@ function App() {
     return children;
   };
 
-  const TutorRoute = ({ children }) => {
-    // TODO: Also check for tutor role
+  const ProtectedTutorRoute = ({ children }) => {
+    // guests are redirected to login
     if (!currentUser) {
       return <Navigate to="/login" />;
     }
 
+    // students are redirected to their dashboard
+    // if (profile != "tutor") {
+    //   return <Navigate to="/dashboard" />;
+    // }
+
     return children;
   };
 
-  const StudentRoute = ({ children }) => {
-    // TODO: Also check for student role
+  const ProtectedStudentRoute = ({ children }) => {
+    // guests are redirected to login
     if (!currentUser) {
       return <Navigate to="/login" />;
+    }
+
+    // tutors are redirected to their tutors dashboard
+    if (profile != "student") {
+      // profile.role
+      return <Navigate to="/tutors" />;
     }
 
     return children;
@@ -55,17 +72,17 @@ function App() {
           <Route
             path="/dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedStudentRoute>
                 <Dashboard />
-              </ProtectedRoute>
+              </ProtectedStudentRoute>
             }
           />
           <Route
             path="/tutors"
             element={
-              <ProtectedRoute>
+              <ProtectedTutorRoute>
                 <TutorView />
-              </ProtectedRoute>
+              </ProtectedTutorRoute>
             }
           />
           <Route
@@ -75,9 +92,9 @@ function App() {
           <Route
             path="/create-ticket"
             element={
-              <ProtectedRoute>
+              <ProtectedStudentRoute>
                 <CreateTicket />
-              </ProtectedRoute>
+              </ProtectedStudentRoute>
             }
           />
           <Route
