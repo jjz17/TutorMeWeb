@@ -38,7 +38,8 @@ const Tickets = () => {
           img: doc.data().img
         }));
         setTickets(ticketList);
-        console.log(ticketList)
+        console.log(ticketList[0].description)
+        console.log(ticketList[0].id)
       } catch (error) {
         console.error('Error fetching tickets:', error);
       }
@@ -51,30 +52,42 @@ const Tickets = () => {
   const handleSelect = (u) => {
     console.log("Chats handleSelect userInfo");
     console.log(u);
-    dispatch({ type: "CHANGE_USER", payload: u });
+    // dispatch({ type: "CHANGE_USER", payload: u });
   };
 
   return (
     <div className="chats">
-      {tickets &&
+      {/* {tickets &&
         Object.entries(tickets)
           ?.sort((a, b) => b.date - a.date)
           .map((ticket) => (
-            // {Object.entries(chats)?.sort((a,b)=>b[1].date - a[1].date).map((chat) => (
             <div
               className="user-chat"
               key={ticket.id}
-              // onClick={() => handleSelect(ticket[1].userInfo)}
+            onClick={() => handleSelect(ticket[1].userInfo)}
             >
-              <p>{ticket.description}</p>
-              
-              {/* {ticket[1].userInfo && (
+            <p>{ticket.description}</p>
+
+              {ticket[1].userInfo && (
                 <img src={ticket[1].userInfo.photoURL} alt="" />
               )}
               <div className="user-chat-info">
                 <span>{ticket[1].userInfo.displayName}</span>
                 <p>{ticket[1].lastMessage?.text}</p>
-              </div> */}
+              </div>
+            </div>
+          ))} */}
+
+
+      {tickets &&
+        tickets
+          .sort((a, b) => b.date - a.date)
+          .map((ticket) => (
+            <div className="user-chat" 
+            key={ticket.id} 
+            onClick={() => handleSelect(ticket)}>
+              {/* Render ticket content here */}
+              <p>{ticket.description}</p>
             </div>
           ))}
     </div>
