@@ -36,9 +36,11 @@ export const AuthContextProvider = ({ children }) => {
           setProfile(doc.data());
           console.log("Profile updated");
           {
-            profile && console.log("Current User Role:", profile.role);
+            // profile && console.log("Current User Role:", profile.role);
           }
         });
+      } else {
+        setProfile(null);
       }
     };
 
