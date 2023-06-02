@@ -13,8 +13,8 @@ const Chat = () => {
   return (
     <div className="chat">
       <div className="chat-info">
-        <p>Chat</p>
-        {/* {data.user.displayName && <span>: with {data.user?.displayName}</span>} */}
+        <p>Ticket</p>
+        {data.ticket && <span>: with {data.ticket?.description}</span>}
       </div>
       <Messages />
       <Input />

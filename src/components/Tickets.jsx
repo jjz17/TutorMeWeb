@@ -16,13 +16,19 @@ const Tickets = () => {
     const fetchTickets = async () => {
       try {
         const snapshot = await getDocs(collection(db, 'tickets'));
-        const ticketList = snapshot.docs.map(doc => ({
-          id: doc.id,
-          description: doc.data().description,
-          date: doc.data().date,
-          img: doc.data().img
-        }));
+        const ticketList = snapshot.docs.map(doc => (
+          {
+            ...doc.data(), "id": doc.id
+          }
+          // {
+          // id: doc.id,
+          // description: doc.data().description,
+          // date: doc.data().date,
+          // img: doc.data().img
+          // }
+        ));
         setTickets(ticketList);
+        // console.log(ticketList)
         // console.log(ticketList[0].description)
         // console.log(ticketList[0].id)
       } catch (error) {
@@ -45,9 +51,9 @@ const Tickets = () => {
         tickets
           .sort((a, b) => b.date - a.date)
           .map((ticket) => (
-            <div className="user-chat" 
-            key={ticket.id} 
-            onClick={() => handleSelect(ticket)}>
+            <div className="user-chat"
+              key={ticket.id}
+              onClick={() => handleSelect(ticket)}>
               {/* Render ticket content here */}
               <p>{ticket.description}</p>
             </div>

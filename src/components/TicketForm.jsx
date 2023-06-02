@@ -43,10 +43,20 @@ const TicketForm = () => {
             //create ticket on firestore
             await setDoc(doc(db, "tickets", ticketId), {
               description: description,
-              // Store tutorId information in ticketChats instead??
-              // tutorId: null,
-              date: Timestamp.now(),
               img: downloadURL,
+              date: Timestamp.now(),
+              studentId: currentUser.uid,
+              tutorId: null,
+              messages: [ // Add first message as the image + description
+                {
+                  id: uuid(),
+                  text: description,
+                  senderId: currentUser.uid,
+                  date: Timestamp.now(),
+                  img: downloadURL,
+                }
+              ],
+              status: "open" // Options will be "open", "in progress" when tutorId != null, and "closed"
             });
 
             // Add ticket to current user's ticket list
@@ -57,21 +67,13 @@ const TicketForm = () => {
             });
 
             // Create ticket chat room
-            await setDoc(doc(db, "ticketChats", ticketId), {
-              studentId: currentUser.uid,
-              tutorId: null,
-              messages: [],
-            });
-            console.log("ticketChats created for ticket on firestore");
-
-            // await updateDoc(doc(db, "userChats", currentUser.uid), {
-            //   [combinedId + ".userInfo"]: {
-            //     uid: user.uid,
-            //     displayName: user.displayName,
-            //     photoURL: user.photoURL,
-            //   },
-            //   [combinedId + ".date"]: serverTimestamp(),
+            // Redundant, removing for now
+            // await setDoc(doc(db, "ticketChats", ticketId), {
+            //   studentId: currentUser.uid,
+            //   tutorId: null,
+            //   messages: [],
             // });
+            // console.log("ticketChats created for ticket on firestore");
 
           });
           console.log("Ticket image uploaded");
