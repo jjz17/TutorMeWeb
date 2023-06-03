@@ -31,9 +31,10 @@ const Message = ({ message }) => {
       </div>
       <div className="message-content">
         {/* This works if the message contains an image and blank text */}
-        {/* {(message.text !== "") && <p>{message.text}</p>} */}
-        <p>{message.text}</p>
         {message.img && <img src={message.img} alt="" />}
+        {(message.text !== "") && <p>{message.text}</p>}
+        {/* <p>{message.text}</p> */}
+        {/* {message.img && <img src={message.img} alt="" />} */}
       </div>
     </div>
   );
