@@ -4,10 +4,12 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
+import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { useNavigate, Link } from "react-router-dom";
 
 const Chat = () => {
+  const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   return (
@@ -15,6 +17,7 @@ const Chat = () => {
       <div className="chat-info">
         <p>Ticket</p>
         {data.ticket && <span>: with {data.ticket?.description}</span>}
+        {/* TODO: Add ticket claiming button to assign tutor */}
       </div>
       <Messages />
       <Input />

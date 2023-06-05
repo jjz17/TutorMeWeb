@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
@@ -20,13 +20,31 @@ const TicketForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, profile } = useContext(AuthContext);
+  const ref = useRef(null);
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    // Prevent non-students from creating tickets
+    if (profile.role !== "student") {
+
+      console.log("Only students can open tickets, your role is:", profile.role);
+      // Clear textbox
+      ref.current.value = "";
+      return;
+    }
+
     const file = e.target[0].files[0];
     const description = e.target[1].value;
+
+    // Require attached file
+    if (file == null) {
+      setErr(true);
+      setErrorMessage("Attached file is required");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const storageRef = ref(storage, uuid());
@@ -77,6 +95,9 @@ const TicketForm = () => {
 
           });
           console.log("Ticket image uploaded");
+          
+          // Clear textbox
+          ref.current.value = "";
         }
       );
     } catch (err) {
@@ -107,6 +128,7 @@ const TicketForm = () => {
               required
               type="text"
               placeholder="Brief problem description"
+              ref={ref}
             />
             <button disabled={loading}>Submit</button>
             {loading && "Creating the ticket..."}
