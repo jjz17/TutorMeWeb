@@ -42,6 +42,10 @@ const Tickets = () => {
 
   const handleSelect = (t) => {
     console.log("Selected ticket", t);
+    if (t.studentId === currentUser.uid) {
+      console.log("You opened this ticket!");
+    }
+
     // Send tutor to ticket chat if the ticket is open or if they have claimed the ticket
     if (t.tutorId == null || t.tutorId === currentUser.uid) {
       console.log("This ticket has not been claimed")
