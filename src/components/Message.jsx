@@ -12,6 +12,12 @@ const Message = ({ message }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
+
+  const openImageInNewTab = (path) => {
+    console.log("Opening image in new tab")
+    window.open(path, '_blank');
+  }
+
   return (
     <div
       ref={ref}
@@ -31,7 +37,7 @@ const Message = ({ message }) => {
       </div>
       <div className="message-content">
         {/* This works if the message contains an image and blank text */}
-        {message.img && <img src={message.img} alt="" />}
+        {message.img && <img src={message.img} onClick={() => openImageInNewTab(message.img)} alt="" />}
         {(message.text !== "") && <p>{message.text}</p>}
         {/* <p>{message.text}</p> */}
         {/* {message.img && <img src={message.img} alt="" />} */}
