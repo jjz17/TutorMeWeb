@@ -1,4 +1,4 @@
-import { doc, onSnapshot, collection, getFirestore, getDocs } from "firebase/firestore";
+import { doc, onSnapshot, collection, getFirestore, getDocs, where, query } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
@@ -10,12 +10,12 @@ const Tickets = () => {
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
-  // Fetch tickets on render
+  // Fetch open tickets on render
   // TODO: refetch tickets whenever the collection is updated
   useEffect(() => {
     const fetchTickets = async () => {
       try {
-        const snapshot = await getDocs(collection(db, 'tickets'));
+        const snapshot = await getDocs(query(collection(db, 'tickets'), where('tutorId', '==', null)));
         const ticketList = snapshot.docs.map(doc => (
           {
             ...doc.data(), "id": doc.id
@@ -28,7 +28,7 @@ const Tickets = () => {
           // }
         ));
         setTickets(ticketList);
-        // console.log(ticketList)
+        console.log(ticketList)
         // console.log(ticketList[0].description)
         // console.log(ticketList[0].id)
       } catch (error) {
