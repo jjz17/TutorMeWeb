@@ -4,17 +4,22 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
+import ClaimTicketButton from "./ClaimTicketButton";
+import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { useNavigate, Link } from "react-router-dom";
 
 const Chat = () => {
+  const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   return (
     <div className="chat">
       <div className="chat-info">
-        <p>Chat</p>
-        {data.user.displayName && <span>: with {data.user?.displayName}</span>}
+        <p>Ticket</p>
+        {data.ticket && <span>: with {data.ticket?.description}</span>}
+        {/* TODO: Add ticket claiming button to assign tutor */}
+        <ClaimTicketButton />
       </div>
       <Messages />
       <Input />

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {
@@ -20,13 +20,31 @@ const TicketForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, profile } = useContext(AuthContext);
+  const textbookRef = useRef(null);
 
   const handleSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    // Prevent non-students from creating tickets
+    if (profile.role !== "student") {
+
+      console.log("Only students can open tickets, your role is:", profile.role);
+      // Clear textbox
+      textbookRef.current.value = "";
+      return;
+    }
+
     const file = e.target[0].files[0];
     const description = e.target[1].value;
+
+    // Require attached file
+    if (file == null) {
+      setErr(true);
+      setErrorMessage("Attached file is required");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const storageRef = ref(storage, uuid());
@@ -43,9 +61,20 @@ const TicketForm = () => {
             //create ticket on firestore
             await setDoc(doc(db, "tickets", ticketId), {
               description: description,
-              tutorId: null,
-              date: Timestamp.now(),
               img: downloadURL,
+              date: Timestamp.now(),
+              studentId: currentUser.uid,
+              tutorId: null,
+              messages: [ // Add first message as the image + description
+                {
+                  id: uuid(),
+                  text: description,
+                  senderId: currentUser.uid,
+                  date: Timestamp.now(),
+                  img: downloadURL,
+                }
+              ],
+              status: "open" // Options will be "open", "in progress" when tutorId != null, and "closed"
             });
 
             // Add ticket to current user's ticket list
@@ -54,8 +83,21 @@ const TicketForm = () => {
                 id: ticketId,
               }),
             });
+
+            // Create ticket chat room
+            // Redundant, removing for now
+            // await setDoc(doc(db, "ticketChats", ticketId), {
+            //   studentId: currentUser.uid,
+            //   tutorId: null,
+            //   messages: [],
+            // });
+            // console.log("ticketChats created for ticket on firestore");
+
           });
           console.log("Ticket image uploaded");
+          
+          // Clear textbox
+          textbookRef.current.value = "";
         }
       );
     } catch (err) {
@@ -86,6 +128,7 @@ const TicketForm = () => {
               required
               type="text"
               placeholder="Brief problem description"
+              ref={ref}
             />
             <button disabled={loading}>Submit</button>
             {loading && "Creating the ticket..."}
