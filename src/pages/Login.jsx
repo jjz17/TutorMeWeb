@@ -29,11 +29,11 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <span>
             <p>Email</p>
-            <input class="form-feild" type="email" placeholder="email" />
+            <input className="form-feild" type="email" placeholder="email" />
           </span>
           <span>
             <p>Password</p>
-            <input class="form-feild" type="password" placeholder="password" />
+            <input className="form-feild" type="password" placeholder="password" />
           </span>
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}

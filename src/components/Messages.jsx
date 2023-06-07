@@ -8,15 +8,35 @@ const Messages = () => {
   const [messages, setMessages] = useState([]);
   const { data } = useContext(ChatContext);
 
+  // useEffect(() => {
+  //   const unSub = onSnapshot(doc(db, "ticketChats", data.ticketId), (doc) => {
+  //     // doc.exists() && setMessages(doc.data().messages);
+  //     if (doc.exists()) {
+  //       setMessages(doc.data().messages);
+  //     } else {
+  //       setMessages([]);
+  //     }
+  //   });
+
+  //   return () => {
+  //     unSub();
+  //   };
+  // }, [data.ticketId]);
+
   useEffect(() => {
-    const unSub = onSnapshot(doc(db, "chats", data.chatId), (doc) => {
-      doc.exists() && setMessages(doc.data().messages);
+    const unSub = onSnapshot(doc(db, "tickets", data.ticketId), (doc) => {
+      // doc.exists() && setMessages(doc.data().messages);
+      if (doc.exists()) {
+        setMessages(doc.data().messages);
+      } else {
+        setMessages([]);
+      }
     });
 
     return () => {
       unSub();
     };
-  }, [data.chatId]);
+  }, [data.ticketId]);
 
   // console.log(messages)
 
@@ -24,6 +44,7 @@ const Messages = () => {
     <div className="messages">
       {messages.map((m) => (
         <Message message={m} key={m.id} />
+        // <p>{m}</p>
       ))}
     </div>
   );

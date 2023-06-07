@@ -6,7 +6,6 @@ export const ChatContext = createContext();
 export const ChatContextProvider = ({ children }) => {
   const { currentUser } = useContext(AuthContext);
   const INITIAL_STATE = {
-    ticketId: "null",
     chatId: "null",
     user: {},
   };
@@ -21,13 +20,6 @@ export const ChatContextProvider = ({ children }) => {
               ? currentUser.uid + action.payload.uid
               : action.payload.uid + currentUser.uid,
         };
-      case "CHANGE_TICKET":
-        return {
-          ticket: action.payload,
-          ticketId: action.payload.id
-        };
-      case "RESET":
-        return INITIAL_STATE;
 
       default:
         return state;
