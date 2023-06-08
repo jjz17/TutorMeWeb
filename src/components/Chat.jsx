@@ -18,10 +18,14 @@ const Chat = () => {
     <div className="chat">
       <div className="chat-info">
         <p>Ticket</p>
-        {data.ticket && <span>: with {data.ticket?.description}</span>}
+        {data.ticket && (
+          <span>
+            : {data.ticket?.description}
+            <ClaimTicketButton />
+            <DropTicketButton />
+          </span>
+        )}
         {/* TODO: Add ticket claiming button to assign tutor */}
-        <ClaimTicketButton />
-        <DropTicketButton />
       </div>
       <Messages />
       <Input />
