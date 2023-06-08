@@ -11,7 +11,7 @@ const Sidebar = () => {
   const handleSelect = () => {
     console.log("Reset ticket chats");
     dispatch({ type: "RESET" });
-  }
+  };
 
   return (
     <div className="sidebar">
@@ -19,8 +19,11 @@ const Sidebar = () => {
       <Search />
       {/* <Chats /> */}
       <Tickets />
-      <div className="blank-space" style={{ backgroundColor: 'lightgray', height: "100px" }} onClick={() => handleSelect()}>
-      </div>
+      <div
+        className="blank-space"
+        style={{ backgroundColor: "lightgray", height: "100px" }}
+        onClick={() => handleSelect()}
+      ></div>
     </div>
   );
 };
