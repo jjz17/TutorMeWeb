@@ -11,7 +11,7 @@ import { ChatContext } from "../context/ChatContext";
 import { useNavigate, Link } from "react-router-dom";
 
 const Chat = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, profile } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
   return (
@@ -21,8 +21,12 @@ const Chat = () => {
         {data.ticket && (
           <span>
             : {data.ticket?.description}
-            <ClaimTicketButton />
-            <DropTicketButton />
+            {profile && profile.role == "tutor" && (
+              <span>
+                <ClaimTicketButton />
+                <DropTicketButton />
+              </span>
+            )}
           </span>
         )}
         {/* TODO: Add ticket claiming button to assign tutor */}
