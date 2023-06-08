@@ -33,7 +33,11 @@ const Login = () => {
           </span>
           <span>
             <p>Password</p>
-            <input className="form-feild" type="password" placeholder="password" />
+            <input
+              className="form-feild"
+              type="password"
+              placeholder="password"
+            />
           </span>
           <button>Sign in</button>
           {err && <span>Something went wrong</span>}

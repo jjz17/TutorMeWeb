@@ -9,7 +9,7 @@ root.render(
   <AuthContextProvider>
     <ChatContextProvider>
       {/* <React.StrictMode> */}
-        <App />
+      <App />
       {/* </React.StrictMode> */}
     </ChatContextProvider>
   </AuthContextProvider>

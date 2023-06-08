@@ -27,8 +27,10 @@ const TicketForm = () => {
     e.preventDefault();
     // Prevent non-students from creating tickets
     if (profile.role !== "student") {
-
-      console.log("Only students can open tickets, your role is:", profile.role);
+      console.log(
+        "Only students can open tickets, your role is:",
+        profile.role
+      );
       // Clear textbox
       textbookRef.current.value = "";
       return;
@@ -65,16 +67,17 @@ const TicketForm = () => {
               date: Timestamp.now(),
               studentId: currentUser.uid,
               tutorId: null,
-              messages: [ // Add first message as the image + description
+              messages: [
+                // Add first message as the image + description
                 {
                   id: uuid(),
                   text: description,
                   senderId: currentUser.uid,
                   date: Timestamp.now(),
                   img: downloadURL,
-                }
+                },
               ],
-              status: "open" // Options will be "open", "in progress" when tutorId != null, and "closed"
+              status: "open", // Options will be "open", "in progress" when tutorId != null, and "closed"
             });
 
             // Add ticket to current user's ticket list
@@ -92,10 +95,9 @@ const TicketForm = () => {
             //   messages: [],
             // });
             // console.log("ticketChats created for ticket on firestore");
-
           });
           console.log("Ticket image uploaded");
-          
+
           // Clear textbox
           textbookRef.current.value = "";
         }
