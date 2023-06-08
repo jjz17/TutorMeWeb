@@ -19,7 +19,6 @@ const Sidenav = () => {
       </Link>
       <Link to="/planner">
         <Calendar color="#ffffff" />
-        {/* <img src={Cam} alt="" /> */}
       </Link>
       <Link to="/search">
         <Search color="#ffffff" />
