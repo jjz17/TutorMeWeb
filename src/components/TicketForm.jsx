@@ -21,7 +21,7 @@ const TicketForm = () => {
   const navigate = useNavigate();
 
   const { currentUser, profile } = useContext(AuthContext);
-  const ref = useRef(null);
+  const textbookRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,7 +32,7 @@ const TicketForm = () => {
         profile.role
       );
       // Clear textbox
-      ref.current.value = "";
+      textbookRef.current.value = "";
       return;
     }
 
@@ -99,7 +99,7 @@ const TicketForm = () => {
           console.log("Ticket image uploaded");
 
           // Clear textbox
-          ref.current.value = "";
+          textbookRef.current.value = "";
         }
       );
     } catch (err) {

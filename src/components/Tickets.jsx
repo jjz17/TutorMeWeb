@@ -21,7 +21,7 @@ const Tickets = () => {
   // Fetch open tickets on render
   // TODO: refetch tickets whenever the collection is updated
   useEffect(() => {
-    const fetchTickets = async () => {
+    const fetchOpenTickets = async () => {
       try {
         const snapshot = await getDocs(
           query(collection(db, "tickets"), where("tutorId", "==", null))
@@ -45,7 +45,7 @@ const Tickets = () => {
       }
     };
 
-    fetchTickets();
+    fetchOpenTickets();
   }, []);
 
   const handleSelect = (t) => {

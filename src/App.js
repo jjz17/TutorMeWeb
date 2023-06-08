@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Chats from "./components/Chats";
+import InProgressPage from "./pages/InProgressPage";
 
 function App() {
   const { currentUser, profile } = useContext(AuthContext);
@@ -44,7 +45,8 @@ function App() {
           />
           <Route
             path="/chats"
-            element={<ProtectedRoute>{/* <Chats /> */}</ProtectedRoute>}
+            // element={<ProtectedRoute>{/* <Chats /> */}</ProtectedRoute>}
+            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
           />
           <Route
             path="/create-ticket"
@@ -56,7 +58,12 @@ function App() {
           />
           <Route
             path="/planner"
-            element={<ProtectedRoute>{/* <Planner /> */}</ProtectedRoute>}
+            // element={<ProtectedRoute>{/* <Planner /> */}</ProtectedRoute>}
+            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
+          />
+          <Route
+            path="/search"
+            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
