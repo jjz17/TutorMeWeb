@@ -4,7 +4,8 @@ import Add from "../img/add.png";
 import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
-import ClaimTicketButton from "./ClaimTicketButton";
+// import ClaimTicketButton from "./ClaimTicketButton";
+import { ClaimTicketButton, DropTicketButton } from "./TicketButtons";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -20,6 +21,7 @@ const Chat = () => {
         {data.ticket && <span>: with {data.ticket?.description}</span>}
         {/* TODO: Add ticket claiming button to assign tutor */}
         <ClaimTicketButton />
+        <DropTicketButton />
       </div>
       <Messages />
       <Input />

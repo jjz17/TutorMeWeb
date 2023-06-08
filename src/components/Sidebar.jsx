@@ -17,8 +17,9 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar />
       <Search />
-      {/* <Chats /> */}
+      OPEN TICKETS
       <Tickets />
+      {/* Clicking on this gray area resets chat context */}
       <div className="blank-space" style={{ backgroundColor: 'lightgray', height: "100px" }} onClick={() => handleSelect()}>
       </div>
     </div>
