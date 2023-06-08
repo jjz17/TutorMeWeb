@@ -12,8 +12,8 @@ import Chats from "./components/Chats";
 
 function App() {
   const { currentUser, profile } = useContext(AuthContext);
-  console.log("User data from AuthContext:", currentUser);
-  console.log("Profile data from AuthContext:", profile);
+  // console.log("Profile data from AuthContext:", profile);
+  console.log("Role from AuthContext is:", profile && profile.role);
 
   // const [profile] = useState(false);
 

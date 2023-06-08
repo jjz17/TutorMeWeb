@@ -31,20 +31,22 @@ export const AuthContextProvider = ({ children }) => {
     let unsub;
 
     const fetchWebUser = async () => {
-      console.log("Fetch web user");
-      if (currentUser) {
+      if (currentUser && currentUser.uid) {
         unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
           setProfile(doc.data());
           console.log("Profile updated");
-          profile && console.log("Current User Role:", profile.role);
+          {
+            // profile && console.log("Current User Role:", profile.role);
+          }
         });
+      } else {
+        setProfile(null);
       }
     };
 
     fetchWebUser();
 
     return () => {
-      console.log("Returning profile", unsub);
       if (unsub) {
         unsub();
       }
