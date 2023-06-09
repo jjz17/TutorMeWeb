@@ -5,13 +5,22 @@ import Register from "./pages/Register";
 import CreateTicket from "./pages/CreateTicket";
 import "./style.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Chats from "./components/Chats";
 import InProgressPage from "./pages/InProgressPage";
 
 function App() {
-  const { currentUser, profile } = useContext(AuthContext);
+  const { currentUser, profile, loading } = useContext(AuthContext);
+  // useEffect(() => {
+  //   if (loading) {
+  //     console.log("loading...");
+  //     return <span></span>
+  //   }
+  //   else {
+  //     return
+  //   }
+  // }, [profile, loading]);
   // console.log("Profile data from AuthContext:", profile);
   console.log("Role from AuthContext is:", profile && profile.role);
 
@@ -46,7 +55,7 @@ function App() {
           <Route
             path="/chats"
             // element={<ProtectedRoute>{/* <Chats /> */}</ProtectedRoute>}
-            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
+            element={<ProtectedRoute>{<InProgressPage />}</ProtectedRoute>}
           />
           <Route
             path="/create-ticket"
@@ -59,11 +68,11 @@ function App() {
           <Route
             path="/planner"
             // element={<ProtectedRoute>{/* <Planner /> */}</ProtectedRoute>}
-            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
+            element={<ProtectedRoute>{<InProgressPage />}</ProtectedRoute>}
           />
           <Route
             path="/search"
-            element={<ProtectedRoute>{ <InProgressPage />}</ProtectedRoute>}
+            element={<ProtectedRoute>{<InProgressPage />}</ProtectedRoute>}
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

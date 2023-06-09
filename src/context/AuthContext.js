@@ -15,7 +15,7 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [profile, setProfile] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -36,9 +36,7 @@ export const AuthContextProvider = ({ children }) => {
         unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
           setProfile(doc.data());
           console.log("Profile updated");
-          if (currentUser && profile) {
-            setLoaded(true);
-          }
+          setLoading(false);
         });
       } else {
         console.log("profile: ", profile);
@@ -57,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, profile, loaded }}>
+    <AuthContext.Provider value={{ currentUser, profile, loaded: loading }}>
       {children}
     </AuthContext.Provider>
   );

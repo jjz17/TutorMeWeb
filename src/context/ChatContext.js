@@ -24,7 +24,7 @@ export const ChatContextProvider = ({ children }) => {
       case "CHANGE_TICKET":
         return {
           ticket: action.payload,
-          ticketId: action.payload.id
+          ticketId: action.payload.id,
         };
       case "RESET":
         return INITIAL_STATE;

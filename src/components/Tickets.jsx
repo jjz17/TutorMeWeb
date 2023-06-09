@@ -18,9 +18,14 @@ const Tickets = () => {
   const [myTickets, setMyTickets] = useState([]); // students and tutors
   const [myOpenTickets, setMyOpenTickets] = useState([]); // students and tutors
   const [myClosedTickets, setMyClosedTickets] = useState([]); // students and tutors
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { currentUser, profile } = useContext(AuthContext);
+  const { currentUser, profile, loaded: loading } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
+
+  useEffect(() => {
+    setIsLoading(loading);
+  }, [loading]);
 
   // Fetch open tickets on render
   // TODO: refetch tickets whenever the collection is updated
@@ -84,14 +89,14 @@ const Tickets = () => {
     };
 
     fetchMyTickets();
-  }, [currentUser, profile]);
+  }, [currentUser, profile, isLoading]);
 
   useEffect(() => {
     var separatedTickets = _.partition(myTickets, (t) => t.status == "open");
 
     setMyOpenTickets(separatedTickets[0]);
     setMyClosedTickets(separatedTickets[1]);
-  }, myTickets);
+  }, [myTickets]);
 
   const handleSelect = (t) => {
     console.log("Selected ticket", t);
@@ -109,21 +114,97 @@ const Tickets = () => {
   };
 
   return (
-    <div className="chats">
-      {unclaimedTickets &&
-        unclaimedTickets
-          .sort((a, b) => b.date - a.date)
-          .map((ticket) => (
-            <div
-              className="user-chat"
-              key={ticket.id}
-              onClick={() => handleSelect(ticket)}
-            >
-              {/* Render ticket content here */}
-              <p>{ticket.description}</p>
-            </div>
-          ))}
-    </div>
+    <span>
+      {isLoading ? (
+        <div>Loading..</div>
+      ) : profile && profile.role === "tutor" ? (
+        <div>
+          <div>Your Claimed Tickets</div>
+          <div className="chats">
+            {myOpenTickets &&
+              myOpenTickets
+                .sort((a, b) => b.date - a.date)
+                .map((ticket) => (
+                  <div
+                    className="user-chat"
+                    key={ticket.id}
+                    onClick={() => handleSelect(ticket)}
+                  >
+                    {/* Render ticket content here */}
+                    <p>{ticket.description}</p>
+                  </div>
+                ))}
+          </div>
+          <div>Unclaimed Tickets</div>
+          <div className="chats">
+            {unclaimedTickets &&
+              unclaimedTickets
+                .sort((a, b) => b.date - a.date)
+                .map((ticket) => (
+                  <div
+                    className="user-chat"
+                    key={ticket.id}
+                    onClick={() => handleSelect(ticket)}
+                  >
+                    {/* Render ticket content here */}
+                    <p>{ticket.description}</p>
+                  </div>
+                ))}
+          </div>
+          <div>Your Past Tickets</div>
+          <div className="chats">
+            {myClosedTickets &&
+              myClosedTickets
+                .sort((a, b) => b.date - a.date)
+                .map((ticket) => (
+                  <div
+                    className="user-chat"
+                    key={ticket.id}
+                    onClick={() => handleSelect(ticket)}
+                  >
+                    {/* Render ticket content here */}
+                    <p>{ticket.description}</p>
+                  </div>
+                ))}
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div>Your Open Tickets</div>
+          <div className="chats">
+            {myOpenTickets &&
+              myOpenTickets
+                .sort((a, b) => b.date - a.date)
+                .map((ticket) => (
+                  <div
+                    className="user-chat"
+                    key={ticket.id}
+                    onClick={() => handleSelect(ticket)}
+                  >
+                    {/* Render ticket content here */}
+                    <p>{ticket.description}</p>
+                  </div>
+                ))}
+          </div>
+          <div>Your Past Tickets</div>
+          <div className="chats">
+            {myClosedTickets &&
+              myClosedTickets
+                .sort((a, b) => b.date - a.date)
+                .map((ticket) => (
+                  <div
+                    className="user-chat"
+                    key={ticket.id}
+                    onClick={() => handleSelect(ticket)}
+                  >
+                    {/* Render ticket content here */}
+                    <p>{ticket.description}</p>
+                  </div>
+                ))}
+          </div>
+        </div>
+      )}
+    </span>
   );
 };
 

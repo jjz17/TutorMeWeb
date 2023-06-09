@@ -17,7 +17,6 @@ const Sidebar = () => {
     <div className="sidebar">
       <Navbar />
       <Search />
-      OPEN TICKETS
       <Tickets />
       {/* Clicking on this gray area resets chat context */}
       <div
