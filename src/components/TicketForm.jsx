@@ -18,6 +18,7 @@ const TicketForm = () => {
   const [err, setErr] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const { currentUser, profile } = useContext(AuthContext);
@@ -97,6 +98,8 @@ const TicketForm = () => {
             // console.log("ticketChats created for ticket on firestore");
           });
           console.log("Ticket image uploaded");
+
+          // navigate("/dashboard");
 
           // Clear textbox
           textbookRef.current.value = "";
