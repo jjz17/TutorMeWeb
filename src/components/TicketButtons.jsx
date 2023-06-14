@@ -57,6 +57,11 @@ export const CloseTicketButton = () => {
         try {
             const docRef = doc(db, "tickets", data.ticketId);
             await updateDoc(docRef, { [roleStatus]: "closed" });
+            // TODO: close ticket if both statuses are closed
+            // const ticket = await docRef.onSnapshot().data();
+            // if (ticket.tutorStatus === ticket.studentStatus === "closed") {
+            //     await updateDoc(docRef, { status: "closed" });
+            // }
             console.log("Ticket closed successfully");
         } catch (error) {
             console.error("Error closing ticket:", error);
