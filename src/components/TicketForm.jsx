@@ -78,7 +78,10 @@ const TicketForm = () => {
                   img: downloadURL,
                 },
               ],
+              // status might be unnecessary
               status: "open", // Options will be "open", implicitly "in progress" when tutorId != null, and "closed"
+              studentStatus: "open",
+              tutorStatus: "open"
             });
 
             // Add ticket to current user's ticket list
