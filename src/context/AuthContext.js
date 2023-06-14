@@ -15,6 +15,7 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState({});
   const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -35,11 +36,11 @@ export const AuthContextProvider = ({ children }) => {
         unsub = onSnapshot(doc(db, "webUsers", currentUser.uid), (doc) => {
           setProfile(doc.data());
           console.log("Profile updated");
-          {
-            // profile && console.log("Current User Role:", profile.role);
-          }
+          setLoading(false);
         });
       } else {
+        console.log("profile: ", profile);
+        console.log("currentUser not set yet");
         setProfile(null);
       }
     };
@@ -54,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, profile }}>
+    <AuthContext.Provider value={{ currentUser, profile, loaded: loading }}>
       {children}
     </AuthContext.Provider>
   );

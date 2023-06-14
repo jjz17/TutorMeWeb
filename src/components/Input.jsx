@@ -52,38 +52,36 @@ const Input = () => {
         console.log("Error sending image", err);
       }
     } else {
-      try {
-        await updateDoc(doc(db, "tickets", data.ticketId), {
-          // arrayUnion updates elements in array
-          messages: arrayUnion({
-            id: uuid(),
-            text,
-            senderId: currentUser.uid,
-            date: Timestamp.now(),
-          }),
-        });
-      } catch (err) {
-        console.log("Error sending message", err);
+      // Don't allow empty messages
+      if (text === "") {
+        console.log("Can't send an empty message");
+      } else {
+        try {
+          await updateDoc(doc(db, "tickets", data.ticketId), {
+            // arrayUnion updates elements in array
+            messages: arrayUnion({
+              id: uuid(),
+              text,
+              senderId: currentUser.uid,
+              date: Timestamp.now(),
+            }),
+          });
+        } catch (err) {
+          console.log("Error sending message", err);
+        }
       }
     }
-
-    // await updateDoc(doc(db, "userChats", currentUser.uid), {
-    //   [data.chatId + ".lastMessage"]: {
-    //     text,
-    //   },
-    //   [data.chatId + ".date"]: serverTimestamp(),
-    // });
-
-    // await updateDoc(doc(db, "userChats", data.user.uid), {
-    //   [data.chatId + ".lastMessage"]: {
-    //     text,
-    //   },
-    //   [data.chatId + ".date"]: serverTimestamp(),
-    // });
 
     setText("");
     setImg(null);
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSend();
+    }
+  };
+
   return (
     <div className="input">
       <input
@@ -91,6 +89,7 @@ const Input = () => {
         placeholder="Type something..."
         onChange={(e) => setText(e.target.value)}
         value={text}
+        onKeyDown={handleKeyPress}
       />
       <div className="send">
         {/* <img src={Attach} alt="" /> */}
