@@ -11,16 +11,19 @@ const Sidebar = () => {
   const handleSelect = () => {
     console.log("Reset ticket chats");
     dispatch({ type: "RESET" });
-  }
+  };
 
   return (
     <div className="sidebar">
       <Navbar />
       <Search />
-      {/* <Chats /> */}
       <Tickets />
-      <div className="blank-space" style={{ backgroundColor: 'lightgray', height: "100px" }} onClick={() => handleSelect()}>
-      </div>
+      {/* Clicking on this gray area resets chat context */}
+      <div
+        className="blank-space"
+        style={{ backgroundColor: "lightgray", height: "100px" }}
+        onClick={() => handleSelect()}
+      ></div>
     </div>
   );
 };
