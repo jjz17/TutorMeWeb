@@ -5,7 +5,7 @@ import More from "../img/more.png";
 import Messages from "./Messages";
 import Input from "./Input";
 // import ClaimTicketButton from "./ClaimTicketButton";
-import { ClaimTicketButton, DropTicketButton } from "./TicketButtons";
+import { ClaimTicketButton, DropTicketButton, CloseTicketButton } from "./TicketButtons";
 import { AuthContext } from "../context/AuthContext";
 import { ChatContext } from "../context/ChatContext";
 import { useNavigate, Link } from "react-router-dom";
@@ -21,15 +21,15 @@ const Chat = () => {
         {data.ticket && (
           <span>
             : {data.ticket?.description}
-            {profile && profile.role == "tutor" && (
+            {profile && profile.role === "tutor" && (
               <span>
                 <ClaimTicketButton />
                 <DropTicketButton />
               </span>
             )}
+            <CloseTicketButton />
           </span>
         )}
-        {/* TODO: Add ticket claiming button to assign tutor */}
       </div>
       <Messages />
       <Input />

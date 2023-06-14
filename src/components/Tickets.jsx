@@ -39,14 +39,8 @@ const Tickets = () => {
           ...doc.data(),
           id: doc.id,
         }));
-        // {
-        // id: doc.id,
-        // description: doc.data().description,
-        // date: doc.data().date,
-        // img: doc.data().img
-        // }
         setUnclaimedTickets(ticketList);
-        console.log(ticketList);
+        // console.log(ticketList);
         // console.log(ticketList[0].description)
         // console.log(ticketList[0].id)
       } catch (error) {
@@ -73,14 +67,8 @@ const Tickets = () => {
           ...doc.data(),
           id: doc.id,
         }));
-        // {
-        // id: doc.id,
-        // description: doc.data().description,
-        // date: doc.data().date,
-        // img: doc.data().img
-        // }
         setMyTickets(ticketList);
-        console.log(ticketList);
+        // console.log(ticketList);
         // console.log(ticketList[0].description)
         // console.log(ticketList[0].id)
       } catch (error) {
@@ -92,7 +80,7 @@ const Tickets = () => {
   }, [currentUser, profile, isLoading]);
 
   useEffect(() => {
-    var separatedTickets = _.partition(myTickets, (t) => t.status == "open");
+    var separatedTickets = _.partition(myTickets, (t) => t.status === "open");
 
     setMyOpenTickets(separatedTickets[0]);
     setMyClosedTickets(separatedTickets[1]);
@@ -102,6 +90,7 @@ const Tickets = () => {
     console.log("Selected ticket", t);
     if (t.studentId === currentUser.uid) {
       console.log("You opened this ticket!");
+      dispatch({ type: "CHANGE_TICKET", payload: t });
     }
 
     // Send tutor to ticket chat if the ticket is open or if they have claimed the ticket
@@ -118,7 +107,8 @@ const Tickets = () => {
       {isLoading ? (
         <div>Loading..</div>
       ) : profile && profile.role === "tutor" ? (
-        <div>
+        // Need to figure out how to dynamically size the scroll height
+        <div style={{ overflowY: 'scroll', height: '500px' }}>
           <div>Your Claimed Tickets</div>
           <div className="chats">
             {myOpenTickets &&

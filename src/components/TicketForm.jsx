@@ -78,7 +78,7 @@ const TicketForm = () => {
                   img: downloadURL,
                 },
               ],
-              status: "open", // Options will be "open", "in progress" when tutorId != null, and "closed"
+              status: "open", // Options will be "open", implicitly "in progress" when tutorId != null, and "closed"
             });
 
             // Add ticket to current user's ticket list
@@ -87,15 +87,6 @@ const TicketForm = () => {
                 id: ticketId,
               }),
             });
-
-            // Create ticket chat room
-            // Redundant, removing for now
-            // await setDoc(doc(db, "ticketChats", ticketId), {
-            //   studentId: currentUser.uid,
-            //   tutorId: null,
-            //   messages: [],
-            // });
-            // console.log("ticketChats created for ticket on firestore");
           });
           console.log("Ticket image uploaded");
 

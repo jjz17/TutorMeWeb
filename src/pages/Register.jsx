@@ -59,10 +59,11 @@ const Register = () => {
             console.log("User created on firestore");
 
             //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-            console.log("userChats created for user on firestore");
+            // await setDoc(doc(db, "userChats", res.user.uid), {});
+            // console.log("userChats created for user on firestore");
 
             //create empty user tickets on firestore if user is student
+            // TODO: Decide if this information isn't necessary because firebase queries are fast
             if (role === "student") {
               await setDoc(doc(db, "userTickets", res.user.uid), {
                 open: [],
