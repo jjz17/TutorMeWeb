@@ -1,4 +1,4 @@
-# StigmiLearning Web App
+# TutorMe Web App
 
 ## Getting Started
 
